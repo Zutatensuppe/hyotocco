@@ -1,0 +1,180 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Camera.gd" type="Script" id=2]
+[ext_resource path="res://data/textures_png/crosshair.png" type="Texture" id=3]
+[ext_resource path="res://data/textures_png/crosshair_fill.png" type="Texture" id=4]
+[ext_resource path="res://data/archer.gltf" type="PackedScene" id=5]
+
+[sub_resource type="CapsuleMesh" id=1]
+
+[sub_resource type="SphereMesh" id=3]
+
+[sub_resource type="CapsuleMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CapsuleShape" id=6]
+radius = 0.249095
+height = 1.2594
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "Standing Aim Idle 01-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "T-Pose-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "Rifle Jump-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Rifle Run-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachine" id=11]
+states/aim/node = SubResource( 13 )
+states/aim/position = Vector2( 215, 378 )
+states/idle/node = SubResource( 14 )
+states/idle/position = Vector2( 124, 119 )
+states/jump/node = SubResource( 15 )
+states/jump/position = Vector2( 446, 73 )
+states/run/node = SubResource( 16 )
+states/run/position = Vector2( 428, 274 )
+transitions = [ "idle", "jump", SubResource( 17 ), "idle", "aim", SubResource( 18 ), "jump", "run", SubResource( 19 ), "aim", "run", SubResource( 20 ), "run", "aim", SubResource( 21 ), "run", "jump", SubResource( 22 ), "jump", "idle", SubResource( 23 ), "aim", "idle", SubResource( 24 ), "run", "idle", SubResource( 25 ), "idle", "run", SubResource( 26 ) ]
+start_node = "idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
+
+[node name="player" type="KinematicBody"]
+script = ExtResource( 1 )
+animationtree = NodePath("AnimationTree")
+
+[node name="archer" parent="." instance=ExtResource( 5 )]
+
+[node name="Erika_Archer_Bow_Mesh" parent="archer/Armature/Skeleton" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 1.42109e-14, 0, -1.42109e-14, 1, 0, 0, 0 )
+
+[node name="Erika_Archer_Arrow_Mesh001" parent="archer/Erika_Archer_Meshes001" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 1.42109e-14, 0, -1.42109e-14, 1, 0, 0, 0 )
+
+[node name="Camroot" type="Spatial" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="h" type="Spatial" parent="Camroot"]
+
+[node name="v" type="Spatial" parent="Camroot/h"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.96269, 0 )
+
+[node name="Camera" type="ClippedCamera" parent="Camroot/h/v"]
+transform = Transform( 1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 1.9, 0, 7.66 )
+far = 400.0
+process_mode = 1
+
+[node name="Mesh" type="Spatial" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+visible = false
+
+[node name="body" type="MeshInstance" parent="Mesh"]
+transform = Transform( -1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+
+[node name="armR" type="MeshInstance" parent="Mesh/body"]
+transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 1, 0, 0 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../../..")
+
+[node name="armL" type="MeshInstance" parent="Mesh/body"]
+transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, -1, 0, 0 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../../..")
+
+[node name="eyeR" type="MeshInstance" parent="Mesh/body"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 8.88178e-16, 0, -8.88178e-16, 0.1, 0.326, -0.917, -0.468 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 5 )
+
+[node name="eyeL" type="MeshInstance" parent="Mesh/body"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 8.88178e-16, 0, -8.88178e-16, 0.1, -0.302, -0.917, -0.468 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 5 )
+
+[node name="ShootFrom" type="Position3D" parent="Mesh/body"]
+transform = Transform( 1, -5.82215e-08, 3.81544e-15, 5.82215e-08, 1, -2.18218e-08, -2.54494e-15, 2.18218e-08, 1, 1.18964, -0.949299, -0.352216 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 1.74846e-07, -7.64274e-15, 0, -4.37114e-08, -1, -1.74846e-07, 1, -4.37114e-08, 0, 0.906161, 0 )
+shape = SubResource( 6 )
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+texture_progress = ExtResource( 4 )
+fill_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="TextureProgress"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AimTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 11 )
+anim_player = NodePath("../archer/AnimationPlayer")
+active = true
+root_motion_track = NodePath("Armature/Skeleton:RootMotion")
+parameters/playback = SubResource( 12 )
+
+[node name="shootFrom" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22872, 1.25468, 0.500162 )
+
+[connection signal="timeout" from="AimTimer" to="." method="_on_AimTimer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+
+[editable path="archer"]
