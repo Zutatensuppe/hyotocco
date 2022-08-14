@@ -71,11 +71,21 @@ animationtree = NodePath("AnimationTree")
 
 [node name="archer" parent="." instance=ExtResource( 5 )]
 
+[node name="Erika_Archer_Arrow_Mesh" parent="archer/Erika_Archer_Meshes" index="0"]
+visible = false
+
 [node name="Erika_Archer_Bow_Mesh" parent="archer/Armature/Skeleton" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 1.42109e-14, 0, -1.42109e-14, 1, 0, 0, 0 )
 
 [node name="Erika_Archer_Arrow_Mesh001" parent="archer/Erika_Archer_Meshes001" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 1.42109e-14, 0, -1.42109e-14, 1, 0, 0, 0 )
+visible = false
+
+[node name="Erika_Archer_Arrow_Mesh002" parent="archer/Erika_Archer_Meshes002" index="0"]
+visible = false
+
+[node name="Erika_Archer_Arrow_Mesh003" parent="archer/Erika_Archer_Meshes003" index="0"]
+visible = false
 
 [node name="Camroot" type="Spatial" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )

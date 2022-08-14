@@ -3,19 +3,20 @@ extends Spatial
 export var muzzle_velocity = 50
 export var g = Vector3.DOWN * 8.51
 
+
+var realMeshScale = 0.01
+var meshScaleInFlight = 0.05
 var velocity = Vector3.ZERO
 var gravity_vec = Vector3()
-var stuck = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Mesh.scale.x = meshScaleInFlight
+	$Mesh.scale.y = meshScaleInFlight
+	$Mesh.scale.z = meshScaleInFlight
 	add_to_group("arrows")
-	pass # Replace with function body.
 
 func _physics_process(delta):
-	if stuck: 
-		return
-	
 	var old_pos = transform.origin
 	velocity += g * delta
 	look_at(transform.origin + velocity.normalized(), Vector3.UP)
@@ -34,15 +35,17 @@ func _physics_process(delta):
 	if not collision.empty() and not collision.collider.is_in_group("players"):
 		if collision.collider.is_in_group("targets"):
 			collision.collider.got_hit()
-		stuck = true
+		elif collision.collider.is_in_group("hooktargets"):
+			collision.collider.being_hooked()
+			get_tree().get_current_scene().get_node('player').hook_towards(collision.collider)
+			
+		set_stuck()
 		transform.origin = collision.position
 	else:
 		transform.origin = new_pos
 
-
-func _on_RigidBody_body_entered(body):
-	if body.is_in_group("players"):
-		return
-	if body.is_in_group("targets"):
-		body.got_hit()
-	stuck = true
+func set_stuck():
+	set_physics_process(false)
+	$Mesh.scale.x = realMeshScale
+	$Mesh.scale.y = realMeshScale
+	$Mesh.scale.z = realMeshScale
