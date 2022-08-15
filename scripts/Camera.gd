@@ -8,8 +8,11 @@ var cam_v_max = 75
 
 var h_sensitivity = 0.1
 var v_sensitivity = 0.1
-var h_acceleration = 10
-var v_acceleration = 10
+
+var DEFAULT_HV_ACCELERATION = 10
+
+var h_acceleration = DEFAULT_HV_ACCELERATION
+var v_acceleration = DEFAULT_HV_ACCELERATION
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,9 +30,6 @@ func _physics_process(delta):
 	$h/v.rotation_degrees.x = lerp($h/v.rotation_degrees.x, camrot_v, delta * v_acceleration)
 
 func set_aiming(aiming):
-	if aiming:
-		h_acceleration = 50
-		v_acceleration = 50
-	else:
-		h_acceleration = 10
-		v_acceleration = 10
+	var factor = 1 / Engine.time_scale
+	h_acceleration = DEFAULT_HV_ACCELERATION * factor
+	v_acceleration = DEFAULT_HV_ACCELERATION * factor

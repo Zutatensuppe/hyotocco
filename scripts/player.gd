@@ -9,6 +9,10 @@ export (NodePath) var animationtree
 
 onready var _anim_tree = get_node(animationtree)
 
+var FOV_NORMAL = 70
+var FOV_AIMING = 30
+var AIM_TIME_SEC = 0.8
+
 var gravity = 20
 var movement_speed = 10
 var jump = 10
@@ -67,15 +71,17 @@ func shoot_arrow(timeLeft):
 	$ShootTimer.start(.3)
 
 func start_aiming(delta):
-	if $AimTimer.is_stopped():
-		$AimTimer.start(.5)
-		
-	$TextureProgress.value = (0.5 - $AimTimer.time_left) / 0.5 * 100
 	Engine.time_scale = 0.2
+	
+	var maxAimTime = AIM_TIME_SEC * Engine.time_scale
+	if $AimTimer.is_stopped():
+		$AimTimer.start(maxAimTime)
+		
+	$crosshairProgress.value = (maxAimTime - $AimTimer.time_left) / maxAimTime * 100
 	$Camroot.set_aiming(true)
 	$Camroot/h/v/Camera.fov = lerp(
 		$Camroot/h/v/Camera.fov,
-		30,
+		FOV_AIMING,
 		delta * fov_accel * 2
 	)
 
@@ -83,14 +89,15 @@ func hook_towards(hooktarget):
 	hooking_towards = hooktarget
 
 func stop_aiming(delta):
+	Engine.time_scale = 1.0
+	
 	if not $AimTimer.is_stopped():
 		$AimTimer.stop()
-	$TextureProgress.value = 0
-	Engine.time_scale = 1.0
+	$crosshairProgress.value = 0
 	$Camroot.set_aiming(false)
 	$Camroot/h/v/Camera.fov = lerp(
 		$Camroot/h/v/Camera.fov,
-		70,
+		FOV_NORMAL,
 		delta * fov_accel
 	)
 
@@ -192,3 +199,8 @@ func _on_AimTimer_timeout():
 
 func _on_ShootTimer_timeout():
 	$ShootTimer.stop()
+
+
+func set_stuck():
+	$crosshairProgress.hide()
+	set_physics_process(false)

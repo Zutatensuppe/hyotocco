@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/target.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://scenes/arrow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/main.gd" type="Script" id=5]
 [ext_resource path="res://scenes/hooktarget.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/goal.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/endMenu.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -32,25 +34,25 @@ albedo_texture = SubResource( 5 )
 
 [sub_resource type="BoxShape" id=7]
 
-[node name="Spatial" type="Spatial"]
+[node name="main" type="Spatial"]
 script = ExtResource( 5 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.999998, -0.00134177, 0.0013296, 0.00133683, 0.999992, 0.00370042, -0.00133457, -0.00369863, 0.999992, -82.7642, 15.0959, 0 )
+transform = Transform( 0.999998, -0.00134177, 0.0013296, 0.00133683, 0.999992, 0.00370042, -0.00133457, -0.00369863, 0.999992, -82.7642, 9.89232, -1.96767 )
 arrow = ExtResource( 4 )
 
-[node name="StaticBody" type="StaticBody" parent="."]
+[node name="floor" type="StaticBody" parent="."]
 
-[node name="lvl" type="MeshInstance" parent="StaticBody"]
+[node name="lvl" type="MeshInstance" parent="floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00394297, 0.00334775, 0.00157785 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 6 )
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="floor"]
 transform = Transform( 128, 0, 0, 0, 0.5, 0, 0, 0, 128, 0.004, 0.003, 0.002 )
 shape = SubResource( 7 )
 
@@ -84,10 +86,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -79.761, 20.6566, 57.4059 )
 [node name="hooktarget3" parent="hooktargets" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -55.1923, 40.5656, -31.6866 )
 
+[node name="hooktarget4" parent="hooktargets" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -55.2899, 5.74007, -63.398 )
+
 [node name="houses" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.155899, 0, 0.0585938 )
 
 [node name="box" parent="houses" instance=ExtResource( 3 )]
-transform = Transform( 11.5637, 0, 0, 0, 8.09398, 0, 0, 0, 26.7231, -90.9369, 0.89751, 0 )
+transform = Transform( 5.16138, 0, 0, 0, 8.09398, 0, 0, 0, 26.7231, -84.0841, 0.89751, 0 )
 
 [node name="box7" parent="houses" instance=ExtResource( 3 )]
 transform = Transform( 11.5637, 0, 0, 0, 8.09398, 0, 0, 0, 18.3373, -18.0735, 9.80097, 12.4045 )
@@ -117,19 +123,13 @@ transform = Transform( -0.343566, 0, 7.97729, 0, 4.64762, 0, -9.03364, 0, -0.978
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 26.7322, -80.1894, 9.32071, 0 )
 
 [node name="box3" parent="houses" instance=ExtResource( 3 )]
-transform = Transform( 9.80767, 0, 0, 0, 1.14787, 0, 0, 0, -1.21608, -91.2959, 6.45519, 27.0951 )
+transform = Transform( 2.56458, 0, 0, 0, 0.484278, -4.31009, 0, 1.5652, 10.1294, -83.6201, 4.07807, 35.1257 )
 
-[node name="box4" parent="houses" instance=ExtResource( 3 )]
-transform = Transform( 9.80767, 0, 0, 0, 1.14787, 0, 0, 0, -1.21608, -91.2959, 5.33948, 29.3642 )
+[node name="goal" parent="." instance=ExtResource( 7 )]
+transform = Transform( 18.0031, 0, -0.295159, 0, 5.43379, 0, 0.2053, 0, 21.7225, -54.5393, 0.361819, -51.7854 )
 
-[node name="box5" parent="houses" instance=ExtResource( 3 )]
-transform = Transform( 9.80767, 0, 0, 0, 1.14787, 0, 0, 0, -1.21608, -91.2959, 3.84493, 30.8335 )
-
-[node name="box6" parent="houses" instance=ExtResource( 3 )]
-transform = Transform( 9.80767, 0, 0, 0, 1.14787, 0, 0, 0, -1.21608, -91.2959, 2.60033, 32.6017 )
-
-[node name="box15" parent="houses" instance=ExtResource( 3 )]
-transform = Transform( 9.80767, 0, 0, 0, 1.14787, 0, 0, 0, -1.21608, -91.2959, 0.708693, 34.4687 )
+[node name="endMenu" parent="." instance=ExtResource( 8 )]
+visible = false
 
 [node name="TargetsLabel" type="Label" parent="."]
 anchor_right = 0.317
@@ -137,3 +137,9 @@ anchor_bottom = 0.222
 margin_top = 5.0
 margin_right = 0.391998
 margin_bottom = -0.200012
+
+[node name="timeElapsedLabel" type="Label" parent="."]
+margin_left = 1.0
+margin_top = 60.0
+margin_right = 41.0
+margin_bottom = 74.0
