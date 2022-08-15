@@ -9,7 +9,6 @@ export (NodePath) var animationtree
 
 onready var _anim_tree = get_node(animationtree)
 
-var direction = Vector3.FORWARD
 var gravity = 20
 var movement_speed = 10
 var jump = 10
@@ -38,14 +37,15 @@ func shoot_arrow(timeLeft):
 	var mouse_position = get_tree().root.get_mouse_position()
 	var ray_from = $Camroot/h/v/Camera.project_ray_origin(mouse_position)
 	var ray_dir = $Camroot/h/v/Camera.project_ray_normal(mouse_position)
+	var ray_to = ray_from + ray_dir * 1000
 	
-	var shoot_target
-	var collision = get_world().direct_space_state.intersect_ray(ray_from, ray_from + ray_dir * 1000, [self], 0b11)
-	if collision.empty():
-		shoot_target = ray_from + ray_dir * 1000
-	else:
-		shoot_target = collision.position
-
+	var collision = get_world().direct_space_state.intersect_ray(
+		ray_from,
+		ray_to,
+		[self],
+		0b11
+	)
+	var shoot_target = ray_to if collision.empty() else collision.position
 	var shoot_dir = (shoot_target - shoot_origin).normalized()
 	
 	var b = arrow.instance()
@@ -72,6 +72,7 @@ func start_aiming(delta):
 		
 	$TextureProgress.value = (0.5 - $AimTimer.time_left) / 0.5 * 100
 	Engine.time_scale = 0.2
+	$Camroot.set_aiming(true)
 	$Camroot/h/v/Camera.fov = lerp(
 		$Camroot/h/v/Camera.fov,
 		30,
@@ -86,6 +87,7 @@ func stop_aiming(delta):
 		$AimTimer.stop()
 	$TextureProgress.value = 0
 	Engine.time_scale = 1.0
+	$Camroot.set_aiming(false)
 	$Camroot/h/v/Camera.fov = lerp(
 		$Camroot/h/v/Camera.fov,
 		70,
@@ -97,28 +99,30 @@ func _physics_process(delta):
 	var aiming = false
 	var jumping = false 
 	var running = false 
-	var hooking = false
 	
 	if hooking_towards != null:
-		var velocity = (hooking_towards.transform.origin - transform.origin).normalized() * pull_speed
-		var old_pos = transform.origin
-		var new_pos = transform.origin + velocity * delta
+		# Pull the player towards the hook target location 
+		var hook_position = hooking_towards.transform.origin
+		var player_position = transform.origin
+		
+		var hook_direction = hook_position - player_position
+		
+		var velocity = hook_direction.normalized() * pull_speed
+		var player_position_new = player_position + velocity * delta
 		
 		var collision = get_world().direct_space_state.intersect_ray(
-			old_pos,
-			new_pos,
+			player_position,
+			player_position_new,
 			[self],
 			0b11
 		)
-		# check if the arrow collided with something
+		# check if collided with target
 		# if yes (and its not a player) then set the position to the collision
-		# otherwise just set newpos
 		if not collision.empty() and collision.collider.is_in_group("hooktargets"):
 			collision.collider.not_being_hooked()
 			hooking_towards = null
 		else:
 			move_and_slide(velocity, Vector3.UP)
-			hooking = true
 	
 	if $ShootTimer.time_left == 0 and not need_release:
 		# may shoot	
@@ -135,7 +139,8 @@ func _physics_process(delta):
 		need_release = false
 
 	# movement up/down/left/right	
-	if not hooking:
+	if not hooking_towards:
+		var direction
 		if (
 			Input.is_action_pressed("move_right") ||
 			Input.is_action_pressed("move_left") || 
@@ -170,6 +175,7 @@ func _physics_process(delta):
 		
 		move_and_slide(movement, Vector3.UP)
 	
+	# set correct animation
 	if aiming:
 		_anim_tree["parameters/playback"].travel("aim")
 	elif jumping:
@@ -178,6 +184,7 @@ func _physics_process(delta):
 		_anim_tree["parameters/playback"].travel("run")
 	else:
 		_anim_tree["parameters/playback"].travel("idle")
+
 
 func _on_AimTimer_timeout():
 	shoot_arrow(0)

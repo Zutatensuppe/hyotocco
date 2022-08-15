@@ -25,3 +25,11 @@ func _physics_process(delta):
 	camrot_v = clamp(camrot_v, cam_v_min, cam_v_max)
 	$h.rotation_degrees.y = lerp($h.rotation_degrees.y, camrot_h, delta * h_acceleration)
 	$h/v.rotation_degrees.x = lerp($h/v.rotation_degrees.x, camrot_v, delta * v_acceleration)
+
+func set_aiming(aiming):
+	if aiming:
+		h_acceleration = 50
+		v_acceleration = 50
+	else:
+		h_acceleration = 10
+		v_acceleration = 10
