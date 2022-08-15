@@ -131,14 +131,18 @@ transform = Transform( 18.0031, 0, -0.295159, 0, 5.43379, 0, 0.2053, 0, 21.7225,
 [node name="endMenu" parent="." instance=ExtResource( 8 )]
 visible = false
 
-[node name="TargetsLabel" type="Label" parent="."]
+[node name="hud" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="targetsLabel" type="Label" parent="hud"]
 anchor_right = 0.317
 anchor_bottom = 0.222
 margin_top = 5.0
 margin_right = 0.391998
-margin_bottom = -0.200012
+margin_bottom = 10.12
 
-[node name="timeElapsedLabel" type="Label" parent="."]
+[node name="timeElapsedLabel" type="Label" parent="hud"]
 margin_left = 1.0
 margin_top = 60.0
 margin_right = 41.0

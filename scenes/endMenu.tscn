@@ -5,6 +5,8 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [node name="endMenu" type="Control"]
@@ -13,28 +15,38 @@ anchor_bottom = 1.0
 script = ExtResource( 2 )
 
 [node name="TextureRect" type="ColorRect" parent="."]
-modulate = Color( 1, 1, 1, 0.270588 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.109804 )
 
-[node name="Control" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="Control" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1004.0
+margin_bottom = 580.0
 alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control"]
-margin_top = 160.0
-margin_right = 1024.0
-margin_bottom = 439.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/Control"]
+margin_top = 112.0
+margin_right = 984.0
+margin_bottom = 391.0
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer2"]
-margin_left = 270.0
-margin_right = 754.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/HBoxContainer2"]
+margin_left = 250.0
+margin_right = 734.0
 margin_bottom = 279.0
 alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/HBoxContainer2/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer"]
 margin_right = 484.0
 margin_bottom = 49.0
 custom_fonts/normal_font = SubResource( 1 )
@@ -43,12 +55,12 @@ bbcode_text = "[center]hyottocco[/center]"
 text = "hyottocco"
 fit_content_height = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/HBoxContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer"]
 margin_top = 53.0
 margin_right = 484.0
 margin_bottom = 279.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer2/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer"]
 margin_right = 256.0
 margin_bottom = 226.0
 custom_constants/margin_right = 80
@@ -56,51 +68,51 @@ custom_constants/margin_top = 80
 custom_constants/margin_left = 80
 custom_constants/margin_bottom = 80
 
-[node name="GridContainer" type="GridContainer" parent="Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer"]
 margin_left = 80.0
 margin_top = 80.0
 margin_right = 176.0
 margin_bottom = 146.0
 columns = 2
 
-[node name="scoreLabel" type="Label" parent="Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer"]
+[node name="scoreLabel" type="Label" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer"]
 margin_right = 71.0
 margin_bottom = 14.0
 text = "Score:"
 
-[node name="scoreValue" type="Label" parent="Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer"]
+[node name="scoreValue" type="Label" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer"]
 margin_left = 75.0
 margin_right = 96.0
 margin_bottom = 14.0
 text = "0"
 
-[node name="timeLabel" type="Label" parent="Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer"]
+[node name="timeLabel" type="Label" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer"]
 margin_top = 18.0
 margin_right = 71.0
 margin_bottom = 32.0
 text = "Time:"
 
-[node name="timeValue" type="Label" parent="Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer"]
+[node name="timeValue" type="Label" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer"]
 margin_left = 75.0
 margin_top = 18.0
 margin_right = 96.0
 margin_bottom = 32.0
 text = "0"
 
-[node name="targetsHitLabel" type="Label" parent="Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer"]
+[node name="targetsHitLabel" type="Label" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer"]
 margin_top = 36.0
 margin_right = 71.0
 margin_bottom = 50.0
 text = "Targets hit:"
 
-[node name="targetsHitValue" type="Label" parent="Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer"]
+[node name="targetsHitValue" type="Label" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer"]
 margin_left = 75.0
 margin_top = 36.0
 margin_right = 96.0
 margin_bottom = 50.0
 text = "0/0"
 
-[node name="MarginContainer2" type="MarginContainer" parent="Control/HBoxContainer2/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer"]
 margin_left = 260.0
 margin_right = 484.0
 margin_bottom = 226.0
@@ -109,21 +121,94 @@ custom_constants/margin_top = 80
 custom_constants/margin_left = 80
 custom_constants/margin_bottom = 80
 
-[node name="GridContainer2" type="GridContainer" parent="Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer2"]
+[node name="GridContainer2" type="GridContainer" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer2"]
 margin_left = 80.0
 margin_top = 80.0
 margin_right = 144.0
 margin_bottom = 146.0
 
-[node name="highscoreLabel" type="Label" parent="Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer2/GridContainer2"]
+[node name="highscoreLabel" type="Label" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer2/GridContainer2"]
 margin_right = 64.0
 margin_bottom = 14.0
 text = "Highscore"
 
-[node name="highscoreValue" type="Label" parent="Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer2/GridContainer2"]
+[node name="highscoreValue" type="Label" parent="MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer2/GridContainer2"]
 margin_top = 18.0
 margin_right = 64.0
 margin_bottom = 66.0
 text = "-
 -
 -"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Control"]
+margin_top = 395.0
+margin_right = 984.0
+margin_bottom = 447.0
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Control/HBoxContainer"]
+margin_right = 134.0
+margin_bottom = 52.0
+columns = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Control/HBoxContainer/GridContainer"]
+margin_right = 43.0
+margin_bottom = 24.0
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/Control/HBoxContainer/GridContainer/MarginContainer"]
+margin_right = 43.0
+margin_bottom = 24.0
+color = Color( 0.411765, 0.411765, 0.411765, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Control/HBoxContainer/GridContainer/MarginContainer"]
+margin_right = 43.0
+margin_bottom = 24.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="MarginContainer/Control/HBoxContainer/GridContainer/MarginContainer/MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 38.0
+margin_bottom = 19.0
+text = "Enter"
+
+[node name="Label2" type="Label" parent="MarginContainer/Control/HBoxContainer/GridContainer"]
+margin_left = 47.0
+margin_top = 5.0
+margin_right = 134.0
+margin_bottom = 19.0
+text = "Restart Game"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/Control/HBoxContainer/GridContainer"]
+margin_top = 28.0
+margin_right = 43.0
+margin_bottom = 52.0
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/Control/HBoxContainer/GridContainer/MarginContainer2"]
+margin_right = 43.0
+margin_bottom = 24.0
+color = Color( 0.411765, 0.411765, 0.411765, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Control/HBoxContainer/GridContainer/MarginContainer2"]
+margin_right = 43.0
+margin_bottom = 24.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="MarginContainer/Control/HBoxContainer/GridContainer/MarginContainer2/MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 38.0
+margin_bottom = 19.0
+text = "ESC"
+
+[node name="Label4" type="Label" parent="MarginContainer/Control/HBoxContainer/GridContainer"]
+margin_left = 47.0
+margin_top = 33.0
+margin_right = 134.0
+margin_bottom = 47.0
+text = "Exit Game"

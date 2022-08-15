@@ -1,13 +1,21 @@
 extends Control
 
+func _process(delta):
+	if Input.is_action_pressed("ui_accept"):
+		get_tree().paused = true
+		get_tree().change_scene("res://scenes/main.tscn")
+		get_tree().paused = false
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().quit()
+
 func setScore(score):
-	$Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer/scoreValue.text = str(score)
+	$MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer/scoreValue.text = str(score)
 
 func setTimeElapsed(timeElapsed):
-	$Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer/timeValue.text = str(timeElapsed)
+	$MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer/timeValue.text = str(timeElapsed)
 
 func setTargetsHit(targetsHit):
-	$Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer/targetsHitValue.text = str(targetsHit)
+	$MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer/GridContainer/targetsHitValue.text = str(targetsHit)
 
 func setHighscore(highscore):
-	$Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer2/GridContainer2/highscoreValue.text = highscore
+	$MarginContainer/Control/HBoxContainer2/VBoxContainer/HBoxContainer/MarginContainer2/GridContainer2/highscoreValue.text = highscore

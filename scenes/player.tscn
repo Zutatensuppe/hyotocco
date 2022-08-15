@@ -88,7 +88,7 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.96269, 0 )
 
 [node name="Camera" type="ClippedCamera" parent="Camroot/h/v"]
-transform = Transform( 1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 1.9, 0, 7.66 )
+transform = Transform( 1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 0.698745, -0.965245, 3.43283 )
 far = 400.0
 process_mode = 1
 
