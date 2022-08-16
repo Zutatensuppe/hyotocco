@@ -1,6 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://data/textures_png/SandyColorBricks_N.jpg" type="Texture" id=1]
+[ext_resource path="res://data/textures_png/SandyColorBricks_S.jpg" type="Texture" id=2]
 
 [sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 2 )
+normal_enabled = true
+normal_scale = 6.01
+normal_texture = ExtResource( 1 )
+uv1_triplanar = true
 
 [sub_resource type="ConvexPolygonShape" id=2]
 points = PoolVector3Array( -1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1, 1, -1 )
@@ -9,6 +19,7 @@ points = PoolVector3Array( -1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, -1, 1, 1, 1,
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
+material/0 = SubResource( 5 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
 

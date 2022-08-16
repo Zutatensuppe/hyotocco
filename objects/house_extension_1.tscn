@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://data/house_extension_1.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://data/textures_png/SandyColorBricks_N.jpg" type="Texture" id=2]
+[ext_resource path="res://data/textures_png/classicroofing (2).png" type="Texture" id=3]
+[ext_resource path="res://data/textures_png/SandyColorBricks_S.jpg" type="Texture" id=4]
+
+[sub_resource type="SpatialMaterial" id=4]
+resource_name = "Material"
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+albedo_color = Color( 0.654902, 0, 0, 1 )
+albedo_texture = ExtResource( 3 )
+roughness = 0.4
+uv1_scale = Vector3( 2, 2, 2 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 4 )
+normal_enabled = true
+normal_scale = 6.01
+normal_texture = ExtResource( 2 )
+uv1_triplanar = true
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( 0.5, 2.37649, 1, 0.5, 2.37649, -1, -0.5, 1.99987, 1, 0.5, 0, 1, 0.5, 0, -1, -0.5, 1.99987, -1, -0.5, 0, 1, -0.5, 0, -1 )
+
+[node name="Spatial" type="StaticBody"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+material/0 = SubResource( 4 )
+material/1 = SubResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )

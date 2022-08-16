@@ -10,13 +10,13 @@ var velocity = Vector3.ZERO
 var gravity_vec = Vector3()
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	$Mesh.scale.x = meshScaleInFlight
 	$Mesh.scale.y = meshScaleInFlight
 	$Mesh.scale.z = meshScaleInFlight
 	add_to_group("arrows")
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	var old_pos = transform.origin
 	velocity += g * delta
 	look_at(transform.origin + velocity.normalized(), Vector3.UP)
@@ -44,7 +44,7 @@ func _physics_process(delta):
 	else:
 		transform.origin = new_pos
 
-func set_stuck():
+func set_stuck() -> void:
 	set_physics_process(false)
 	$Mesh.scale.x = realMeshScale
 	$Mesh.scale.y = realMeshScale
