@@ -12,10 +12,15 @@
 [ext_resource path="res://objects/door.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0.858824, 0.858824, 0.858824, 1 )
+sky_horizon_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="Environment" id=2]
 background_mode = 2
 background_sky = SubResource( 1 )
+fog_color = Color( 0.737255, 0.737255, 0.737255, 1 )
+fog_sun_color = Color( 0, 0, 0, 1 )
+fog_depth_begin = 0.0
 
 [sub_resource type="CubeMesh" id=3]
 size = Vector3( 256, 1, 256 )
@@ -62,10 +67,11 @@ shape = SubResource( 7 )
 transform = Transform( 0.997998, 0, 0, 0, 0.997998, 0, 0, 0, 0.997998, 0, 0, 0 )
 
 [node name="target1" parent="targets" instance=ExtResource( 2 )]
-transform = Transform( 0.151865, 0, -0.988402, 0, 1, 0, 0.988402, 0, 0.151865, -11.3095, 19.7989, 21.3709 )
+transform = Transform( 0.151865, 0, -0.988402, 0, 1, 0, 0.988402, 0, 0.151865, -11.3095, 17.2888, 21.3709 )
 
 [node name="target2" parent="targets" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.9102, 15.3491, 38.9174 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.6341, 26.4777, 38.9175 )
+show_holder = false
 
 [node name="target3" parent="targets" instance=ExtResource( 2 )]
 transform = Transform( 0.028602, 0, -0.999591, 0, 1, 0, 0.999591, 0, 0.028602, -59.0031, 2.43533, 64.4046 )
@@ -137,7 +143,7 @@ transform = Transform( 0.587542, 0, 0, 0, 3.34519, 0, 0, 0, 0.473706, -79.3912, 
 transform = Transform( 0.587542, 0, 0, 0, 3.34519, 0, 0, 0, 0.473706, -79.3912, 10.4759, -6.0176 )
 
 [node name="box7" parent="houses" instance=ExtResource( 3 )]
-transform = Transform( 11.5637, 0, 0, 0, 8.09398, 0, 0, 0, 18.3373, -18.0735, 9.80097, 12.4045 )
+transform = Transform( 11.5637, 0, 0, 0, 8.09398, 0, 0, 0, 18.3373, -18.0735, 7.43555, 12.4045 )
 
 [node name="box14" parent="houses" instance=ExtResource( 3 )]
 transform = Transform( 5.37295, 0, 0, 0, 9.44053, 0, 0, 0, 4.93657, -15.1328, 20.7268, 39.014 )

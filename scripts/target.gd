@@ -1,6 +1,14 @@
 extends Spatial
 
+export var show_holder : bool = true
+
 func _ready() -> void:
+	if not show_holder: 
+		$UnhitMesh/Holder.hide()
+		$HitMesh/Holder.hide()
+	else: 
+		$UnhitMesh/Holder.show()
+		$HitMesh/Holder.show()
 	$HitMesh.hide()
 	$UnhitMesh.show()
 	add_to_group("targets")
