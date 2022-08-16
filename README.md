@@ -8,6 +8,9 @@ Ingame (early screenshot):
 End Screen:  
 ![2022-08-15_21-01.png](docs/2022-08-15_21-01.png)
 
+
+![2022-08-16_23-25.png](docs/2022-08-16_23-25.png)
+
 ## Resources
 
 - animated character tutorial - [youtube.com/watch?v=EmQBLxxPV3E](https://www.youtube.com/watch?v=EmQBLxxPV3E)
@@ -15,3 +18,4 @@ End Screen:
 - model + animation - [mixamo.com/](https://www.mixamo.com/)
 - restart level, quit game - [godot-tutorial-16](https://www.davidepesce.com/2020/02/11/godot-tutorial-16-pause-menu-restart-quit-game/)
 - keep highscores across level restarts - [global variables](https://godotengine.org/qa/87536/remain-score-while-changing-scenes)
+- Textures - [opengameart.org](https://opengameart.org/)
